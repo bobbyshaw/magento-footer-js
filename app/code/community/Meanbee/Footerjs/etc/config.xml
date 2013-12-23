@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Meanbee_Footerjs>
+            <version>0.0.1</version>
+        </Meanbee_Footerjs>
+    </modules>
+    <global>
+        <models>
+            <meanbee_footerjs>
+                <class>Meanbee_Footerjs_Model</class>
+            </meanbee_footerjs>
+        </models>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <meanbee_footerjs>
+                    <file>meanbee/footerjs.xml</file>
+                </meanbee_footerjs>
+            </updates>
+        </layout>
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <meanbee_footerjs>
+                        <type>singleton</type>
+                        <class>meanbee_footerjs/observer</class>
+                        <method>handleInlineJs</method>
+                    </meanbee_footerjs>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+</config>

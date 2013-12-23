@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Meanbee_Footerjs>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Meanbee_Footerjs>
+    </modules>
+</config>

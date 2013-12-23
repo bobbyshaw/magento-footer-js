@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <block type="core/text" name="inline.js" output="toHtml" after="-" />
+        </reference>
+    </default>
+</layout>
