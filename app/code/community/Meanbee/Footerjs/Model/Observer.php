@@ -10,7 +10,22 @@ class Meanbee_Footerjs_Model_Observer {
      *
      * @return $this
      */
-    public function handleInlineJs(Varien_Event_Observer $observer) {
+    public function handleInlineJs(Varien_Event_Observer $observer)
+    {
+        /** @var Meanbee_Footerjs_Helper_Data $helper */
+        $helper = Mage::helper('meanbee_footerjs');
+        if (!$helper->isEnabled()) {
+            return $this;
+        }
+
+        /** @var Mage_Core_Block_Abstract $block */
+        $block = $observer->getBlock();
+
+        if (!is_null($block->getParentBlock())) {
+            // Only look for JS at the root block
+            return $this;
+        }
+
         /** @var Varien_Object $transport */
         $transport = $observer->getTransport();
 
@@ -33,5 +48,4 @@ class Meanbee_Footerjs_Model_Observer {
 
         return $this;
     }
-
 }

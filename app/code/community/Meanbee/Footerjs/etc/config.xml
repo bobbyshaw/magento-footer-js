@@ -6,6 +6,11 @@
         </Meanbee_Footerjs>
     </modules>
     <global>
+        <helpers>
+            <meanbee_footerjs>
+                <class>Meanbee_Footerjs_Helper</class>
+            </meanbee_footerjs>
+        </helpers>
         <models>
             <meanbee_footerjs>
                 <class>Meanbee_Footerjs_Model</class>
