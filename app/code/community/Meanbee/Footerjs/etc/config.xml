@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Meanbee_Footerjs>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
         </Meanbee_Footerjs>
     </modules>
     <global>
@@ -18,13 +18,6 @@
         </models>
     </global>
     <frontend>
-        <layout>
-            <updates>
-                <meanbee_footerjs>
-                    <file>meanbee/footerjs.xml</file>
-                </meanbee_footerjs>
-            </updates>
-        </layout>
         <events>
             <core_block_abstract_to_html_after>
                 <observers>
