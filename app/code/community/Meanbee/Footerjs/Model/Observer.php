@@ -1,8 +1,8 @@
 <?php
 class Meanbee_Footerjs_Model_Observer {
 
-    const REGEX_JS              = '#<script.*</script>#isU';
-    const REGEX_CONDITIONAL_JS  = '#<\!--\[if[^\>]*>\s*<script.*</script>\s*<\!\[endif\]-->#isU';
+    // Regular expression that matches one or more script tags (including conditions or comments)
+    const REGEX_JS  = '#(\s*<![^>]*>\s*(\s*<script.*</script>)+\s*<![^>]*-->)|(\s*<script.*</script>)#isU';
     const REGEX_DOCUMENT_END    = '#</body>.*</html>#isU';
 
     /**
@@ -16,7 +16,6 @@ class Meanbee_Footerjs_Model_Observer {
 
         $patterns = array(
             'js'             => self::REGEX_JS,
-            'conditional_js' => self::REGEX_CONDITIONAL_JS,
             'document_end'   => self::REGEX_DOCUMENT_END
         );
 
