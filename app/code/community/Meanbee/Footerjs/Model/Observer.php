@@ -1,7 +1,7 @@
 <?php
 class Meanbee_Footerjs_Model_Observer {
 
-    // Regular expression that matches one or more script tags (including conditions but not commends)
+    // Regular expression that matches one or more script tags (including conditions but not comments)
     const REGEX_JS            = '#(\s*<!--\[if[^>]*>\s*(<script.*</script>)+\s*<!\[endif\]-->)|(<script.*</script>)#isU';
     const REGEX_DOCUMENT_END  = '#</body>\s*</html>#isU';
 
