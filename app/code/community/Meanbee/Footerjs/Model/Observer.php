@@ -2,7 +2,7 @@
 class Meanbee_Footerjs_Model_Observer {
 
     // Regular expression that matches one or more script tags (including conditions but not comments)
-    const REGEX_JS            = '#(\s*<!--\[if[^\n]*>\s*(<script.*</script>)+\s*<!\[endif\]-->)|(<script.*</script>)#isU';
+    const REGEX_JS            = '#(\n\s*<!--\[if[^\n]*>\s*(<script.*</script>)+\s*<!\[endif\]-->)|(\n\s*<script.*</script>)#isU';
     const REGEX_DOCUMENT_END  = '#</body>\s*</html>#isU';
 
     /**
