@@ -12,6 +12,8 @@ class Meanbee_Footerjs_Model_Observer {
      */
     public function handleInlineJs(Varien_Event_Observer $observer)
     {
+        Varien_Profiler::start('MeanbeeFooterJs');
+
         /** @var Meanbee_Footerjs_Helper_Data $helper */
         $helper = Mage::helper('meanbee_footerjs');
         if (!$helper->isEnabled()) {
@@ -45,6 +47,8 @@ class Meanbee_Footerjs_Model_Observer {
                 $transport->setHtml($html . $text);
             }
         }
+
+        Varien_Profiler::stop('MeanbeeFooterJs');
 
         return $this;
     }
