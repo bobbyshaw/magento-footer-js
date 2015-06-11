@@ -1,2 +1,2 @@
-app/code/community/Meanbee/Footerjs app/code/community/Meanbee/Footerjs
-app/etc/modules/* app/etc/modules/
+app/code/community/Meanbee/Footerjs/    app/code/community/Meanbee/Footerjs/
+app/etc/modules/Meanbee_Footerjs.xml     app/etc/modules/Meanbee_Footerjs.xml
