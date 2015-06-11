@@ -1,0 +1,9 @@
+{
+    "description": "Meanbee Footerjs module",
+    "name": "meanbee/footerjs",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "type": "magento-module",
+    "version": "dev-master"
+}
