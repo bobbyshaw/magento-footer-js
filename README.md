@@ -2,9 +2,12 @@
 
 A common web development technique to improve page load times is to move JavaScript to the end of the page.  A common frustration for frontend Magento developers is the inability to do this due to the amount of inline JavaScript found in templates.
 
-This is an experimental plugin that observes for the `core_block_abstract_to_html_after` event, removes any javascript it finds and appends it to a block at the end of the page for the root block.
+This extnesion observes for the `http_response_send_before` event, removes any javascript it finds and appends it to a block at the end of the page for the root block.
 
-Prelimnary tests in Chrome Mac OS X show that there are no console errors on home, category, product, cart and checkout pages.
+Tested against:
+
+- CE 1.9
+- EE 1.14 (inc FPC)
 
 # License
 
