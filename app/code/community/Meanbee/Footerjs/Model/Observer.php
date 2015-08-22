@@ -24,6 +24,11 @@ class Meanbee_Footerjs_Model_Observer {
         /** @var Mage_Core_Controller_Response_Http $response */
         $response = $observer->getResponse();
 
+        if (!$response->getBody()) {
+            // No further action if no body, e.g. redirect
+            return $this;
+        }
+
         $patterns = array(
             'js'             => self::REGEX_JS,
             'document_end'   => self::REGEX_DOCUMENT_END
