@@ -1,4 +1,5 @@
 <?php
+
 class Meanbee_Footerjs_Model_Observer {
 
     // Regular expression that matches one or more script tags (including conditions but not comments)
@@ -20,16 +21,8 @@ class Meanbee_Footerjs_Model_Observer {
             return $this;
         }
 
-        /** @var Mage_Core_Block_Abstract $block */
-        $block = $observer->getBlock();
-
-        if (!is_null($block->getParentBlock())) {
-            // Only look for JS at the root block
-            return $this;
-        }
-
-        /** @var Varien_Object $transport */
-        $transport = $observer->getTransport();
+        /** @var Mage_Core_Controller_Response_Http $response */
+        $response = $observer->getResponse();
 
         $patterns = array(
             'js'             => self::REGEX_JS,
@@ -39,12 +32,12 @@ class Meanbee_Footerjs_Model_Observer {
         foreach($patterns as $pattern) {
             $matches = array();
 
-            $html = $transport->getHtml();
+            $html = $response->getBody();
             $success = preg_match_all($pattern, $html, $matches);
             if ($success) {
                 $text = implode('', $matches[0]);
                 $html = preg_replace($pattern, '', $html);
-                $transport->setHtml($html . $text);
+                $response->setBody($html . $text);
             }
         }
 

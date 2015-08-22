@@ -19,7 +19,7 @@
     </global>
     <frontend>
         <events>
-            <core_block_abstract_to_html_after>
+            <http_response_send_before>
                 <observers>
                     <meanbee_footerjs>
                         <type>singleton</type>
@@ -27,7 +27,7 @@
                         <method>handleInlineJs</method>
                     </meanbee_footerjs>
                 </observers>
-            </core_block_abstract_to_html_after>
+            </http_response_send_before>
         </events>
     </frontend>
 </config>
