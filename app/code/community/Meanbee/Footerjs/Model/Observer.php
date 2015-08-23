@@ -2,16 +2,12 @@
 
 class Meanbee_Footerjs_Model_Observer {
 
-    // Regular expression that matches one or more script tags (including conditions but not comments)
-    const REGEX_JS            = '#(\s*<!--\[if[^\n]*>\s*(<script.*</script>)+\s*<!\[endif\]-->)|(\s*<script.*</script>)#isU';
-    const REGEX_DOCUMENT_END  = '#</body>\s*</html>#isU';
-
     /**
      * @param Varien_Event_Observer $observer
      *
      * @return $this
      */
-    public function handleInlineJs(Varien_Event_Observer $observer)
+    public function handleHttpResponseInlineJs(Varien_Event_Observer $observer)
     {
         Varien_Profiler::start('MeanbeeFooterJs');
 
@@ -24,30 +20,55 @@ class Meanbee_Footerjs_Model_Observer {
         /** @var Mage_Core_Controller_Response_Http $response */
         $response = $observer->getResponse();
 
-        if (!$response->getBody()) {
-            // No further action if no body, e.g. redirect
+        if ($response->isRedirect() || !$response->getBody()) {
+            // No further action if no body or we know it's a redirect
             return $this;
         }
 
-        $patterns = array(
-            'js'             => self::REGEX_JS,
-            'document_end'   => self::REGEX_DOCUMENT_END
-        );
-
-        foreach($patterns as $pattern) {
-            $matches = array();
-
-            $html = $response->getBody();
-            $success = preg_match_all($pattern, $html, $matches);
-            if ($success) {
-                $text = implode('', $matches[0]);
-                $html = preg_replace($pattern, '', $html);
-                $response->setBody($html . $text);
-            }
-        }
+        $response->setBody($helper->moveJsToEnd($response->getBody()));
 
         Varien_Profiler::stop('MeanbeeFooterJs');
 
         return $this;
     }
+
+    /**
+     * @param Varien_Event_Observer $observer
+     *
+     * @return $this
+     */
+    public function handleBlockInlineJs(Varien_Event_Observer $observer)
+    {
+        Varien_Profiler::start('MeanbeeFooterJs');
+
+        /** @var Meanbee_Footerjs_Helper_Data $helper */
+        $helper = Mage::helper('meanbee_footerjs');
+        if (!$helper->isEnabled()) {
+            return $this;
+        }
+
+        /** @var Varien_Object $transport */
+        $transport = $observer->getTransport();
+
+        /** @var Mage_Core_Block_Abstract $block */
+        $block = $observer->getBlock();
+
+        if (Mage::app()->getRequest()->getModuleName() == 'pagecache') {
+            $transport->setHtml($helper->removeJs($transport->getHtml()));
+            return $this;
+        }
+
+        if (!is_null($block->getParentBlock())) {
+            // Only look for JS at the root block
+            return $this;
+        }
+
+        $transport->setHtml($helper->moveJsToEnd($transport->getHtml()));
+
+        Varien_Profiler::stop('MeanbeeFooterJs');
+
+        return $this;
+    }
+
+
 }
