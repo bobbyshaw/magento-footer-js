@@ -19,12 +19,6 @@ class Meanbee_Footerjs_Model_Observer {
 
         /** @var Mage_Core_Controller_Response_Http $response */
         $response = $observer->getResponse();
-
-        if ($response->isRedirect() || !$response->getBody()) {
-            // No further action if no body or we know it's a redirect
-            return $this;
-        }
-
         $response->setBody($helper->moveJsToEnd($response->getBody()));
 
         Varien_Profiler::stop('MeanbeeFooterJs');
