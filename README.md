@@ -8,6 +8,10 @@ Tested against:
 
 - CE 1.9
 - EE 1.14 (inc FPC)
+ 
+# Usage
+
+Enable the extension in `System > Configuration > Advanced > Developer > JavaScript Settings > Move JavaScript to Footer`.
 
 # License
 
