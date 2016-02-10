@@ -14,6 +14,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </meanbee_footer_js_enabled>
+                        <meanbee_footer_js_excluded_blocks translate="label comment">
+                            <label>FooterJS Excluded Blocks</label>
+                            <frontend_type>textarea</frontend_type>
+                            <comment><![CDATA[Block names in layout, separated with Comma. All JS from these blocks will stay untouched and will not be moved to footer.<br/><strong>Warning:</strong> JS libraries are moved to footer so be carefull with excluding JS which requires that libraries.]]></comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </meanbee_footer_js_excluded_blocks>
                     </fields>
                 </js>
             </groups>

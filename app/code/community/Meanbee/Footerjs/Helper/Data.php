@@ -7,6 +7,13 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
     const REGEX_DOCUMENT_END  = '#</body>\s*</html>#isU';
 
     const XML_CONFIG_FOOTERJS_ENABLED = 'dev/js/meanbee_footer_js_enabled';
+    const XML_CONFIG_FOOTERJS_EXCLUDED_BLOCKS = 'dev/js/meanbee_footer_js_excluded_blocks';
+
+    const EXCLUDE_FLAG = 'data-meanbee-skip="true"';
+    const EXCLUDE_FLAG_PATTERN = 'data-meanbee-skip';
+
+    /** @var array */
+    protected $_blocksToExclude;
 
     /**
      * @param null $store
@@ -29,8 +36,12 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
 
             $success = preg_match_all($pattern, $html, $matches);
             if ($success) {
-                $text = implode('', $matches[0]);
-                $html = preg_replace($pattern, '', $html);
+                foreach ($matches[0] as $key => $js) {
+                    if (strpos($js, self::EXCLUDE_FLAG_PATTERN) !== false) {
+                        unset($matches[0][$key]);
+                    }
+                }
+                $html = str_replace($matches[0], '', $html);
             }
         }
 
@@ -49,12 +60,49 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
 
             $success = preg_match_all($pattern, $html, $matches);
             if ($success) {
+                foreach ($matches[0] as $key => $js) {
+                    if (strpos($js, self::EXCLUDE_FLAG_PATTERN) !== false) {
+                        unset($matches[0][$key]);
+                    }
+                }
                 $text = implode('', $matches[0]);
-                $html = preg_replace($pattern, '', $html);
+                $html = str_replace($matches[0], '', $html);
                 $html = $html . $text;
             }
         }
 
         return $html;
+    }
+
+    /**
+     * Add skip flag to all js in given html
+     * 
+     * @param string $html
+     * @return string
+     */
+    public function addJsToExclusion($html)
+    {
+        return str_replace('<script', '<script ' . self::EXCLUDE_FLAG, $html);
+    }
+
+    /**
+     * Get list of block names (in layout) to exclude their JS from moving to footer
+     *
+     * @return array
+     */
+    public function getBlocksToSkipMoveJs()
+    {
+        if (is_null($this->_blocksToExclude)) {
+            $string = Mage::getStoreConfig(self::XML_CONFIG_FOOTERJS_EXCLUDED_BLOCKS);
+            $exludedBlocks = explode(',', $string);
+            foreach ($exludedBlocks as $key => $blockName) {
+                $exludedBlocks[$key] = trim($blockName);
+                if (strpos($exludedBlocks[$key], "\n") || strpos($exludedBlocks[$key], ' ')) {
+                    Mage::log('Missing comma in setting "' . self::XML_CONFIG_FOOTERJS_EXCLUDED_BLOCKS . '"', Zend_Log::ERR, null, true);
+                }
+            }
+            $this->_blocksToExclude = array_filter($exludedBlocks);
+        }
+        return $this->_blocksToExclude;
     }
 }
