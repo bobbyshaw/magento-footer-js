@@ -13,10 +13,10 @@ Tested against:
 
 Enable the extension in `System > Configuration > Advanced > Developer > JavaScript Settings > Move JavaScript to Footer`.
 
-Add block names with JS which must not be moved to footer in `System > Configuration > Advanced > Developer > JavaScript Settings > FooterJS Excluded Blocks`.
-Enter block names separated with Comma. Please note, JS libraries are moved to footer so be carefull with excluding JS which requires that libraries.
+Add name of blocks with JS which must not be moved to footer in `System > Configuration > Advanced > Developer > JavaScript Settings > FooterJS Excluded Blocks`.
+Enter block names separated with a comma. Please note, JS libraries are moved to footer so be careful excluding JS which has dependencies.
 
-Also there is another way to exclude some JS from moving to the footer - add attribute `data-meanbee-skip="true"` to `script` tag.
+Also there is another way to exclude some JS from moving to the footer - add attribute `data-footer-js-skip="true"` to `script` tag.
 Currently there is no way to exclude JS added using addJs/addItem in layout.
 
 # License

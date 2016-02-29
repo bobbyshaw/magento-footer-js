@@ -9,8 +9,8 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
     const XML_CONFIG_FOOTERJS_ENABLED = 'dev/js/meanbee_footer_js_enabled';
     const XML_CONFIG_FOOTERJS_EXCLUDED_BLOCKS = 'dev/js/meanbee_footer_js_excluded_blocks';
 
-    const EXCLUDE_FLAG = 'data-meanbee-skip="true"';
-    const EXCLUDE_FLAG_PATTERN = 'data-meanbee-skip';
+    const EXCLUDE_FLAG = 'data-footer-js-skip="true"';
+    const EXCLUDE_FLAG_PATTERN = 'data-footer-js-skip';
 
     /** @var array */
     protected $_blocksToExclude;
