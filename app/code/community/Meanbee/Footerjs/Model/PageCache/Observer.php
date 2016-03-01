@@ -24,6 +24,10 @@ class Meanbee_Footerjs_Model_PageCache_Observer extends Enterprise_PageCache_Mod
 
         if ($transport && $placeholder && !$block->getSkipRenderTag()) {
             $blockHtml = $transport->getHtml();
+            $footerJs = Mage::helper('meanbee_footerjs');
+            if (in_array($block->getNameInLayout(), $footerJs->getBlocksToSkipMoveJs())) {
+                $blockHtml = $footerJs->addJsToExclusion($blockHtml);
+            }
 
             $request = Mage::app()->getFrontController()->getRequest();
             /** @var $processor Enterprise_PageCache_Model_Processor_Default */
@@ -36,7 +40,6 @@ class Meanbee_Footerjs_Model_PageCache_Observer extends Enterprise_PageCache_Mod
                     $container->setPlaceholderBlock($block);
 
                     // Modify to not save block with JS in it as JS is being moved to the end of the page.
-                    $footerJs = Mage::helper('meanbee_footerjs');
                     $container->saveCache($footerJs->removeJs($blockHtml));
                 }
             }
