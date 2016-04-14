@@ -3,7 +3,7 @@
 class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
 
     // Regular expression that matches one or more script tags (including conditions but not comments)
-    const REGEX_JS            = '#(\s*<!--\[if[^\n]*>\s*(<script.*</script>)+\s*<!\[endif\]-->)|(\s*<script.*</script>)#isU';
+    const REGEX_JS            = '#(\s*<!--(\[if[^\n]*>)?\s*(<script.*</script>)+\s*(<!\[endif\])?-->)|(\s*<script.*</script>)#isU';
     const REGEX_DOCUMENT_END  = '#</body>\s*</html>#isU';
 
     const XML_CONFIG_FOOTERJS_ENABLED = 'dev/js/meanbee_footer_js_enabled';
