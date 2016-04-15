@@ -1,5 +1,7 @@
 <?php
-class Meanbee_Footerjs_Model_PageCache_Observer extends Enterprise_PageCache_Model_Observer {
+
+class Meanbee_Footerjs_Model_PageCache_Observer extends Enterprise_PageCache_Model_Observer
+{
 
 
     /**
