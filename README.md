@@ -2,7 +2,7 @@
 
 A common web development technique to improve page load times is to move JavaScript to the end of the page.  A common frustration for frontend Magento developers is the inability to do this due to the amount of inline JavaScript found in templates.
 
-This extension observes for the `http_response_send_before` event, removes any javascript it finds and appends it to a block at the end of the page for the root block.
+This extension observes for the `core_block_abstract_to_html_after` event, removes any javascript it finds and appends it to the end of the body.
 
 Tested against:
 
