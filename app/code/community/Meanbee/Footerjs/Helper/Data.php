@@ -8,12 +8,16 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
 
     const XML_CONFIG_FOOTERJS_ENABLED = 'dev/js/meanbee_footer_js_enabled';
     const XML_CONFIG_FOOTERJS_EXCLUDED_BLOCKS = 'dev/js/meanbee_footer_js_excluded_blocks';
+    const XML_CONFIG_FOOTERJS_EXCLUDED_FILES = 'dev/js/meanbee_footer_js_excluded_files';
 
     const EXCLUDE_FLAG = 'data-footer-js-skip="true"';
     const EXCLUDE_FLAG_PATTERN = 'data-footer-js-skip';
 
     /** @var array */
     protected $_blocksToExclude;
+
+    /** @var string */
+    protected $skippedFilesRegex;
 
     /**
      * @param null $store
@@ -60,6 +64,8 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
 
             $success = preg_match_all($pattern, $html, $matches);
             if ($success) {
+                // Strip excluded files
+                $matches[0] = preg_grep($this->getSkippedFilesRegex(), $matches[0], PREG_GREP_INVERT);
                 foreach ($matches[0] as $key => $js) {
                     if (strpos($js, self::EXCLUDE_FLAG_PATTERN) !== false) {
                         unset($matches[0][$key]);
@@ -72,6 +78,17 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
         }
 
         return $html;
+    }
+
+    public function getSkippedFilesRegex()
+    {
+        if ($this->skippedFilesRegex === null) {
+            $skipConfig = trim(Mage::getStoreConfig(self::XML_CONFIG_FOOTERJS_EXCLUDED_FILES));
+            $skippedFiles = preg_replace('/\s*,\s*/', '|', $skipConfig);
+
+            $this->skippedFilesRegex = sprintf("@src=.*?(%s)@", $skippedFiles);
+        }
+        return $this->skippedFilesRegex;
     }
 
     /**

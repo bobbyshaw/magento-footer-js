@@ -23,6 +23,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </meanbee_footer_js_excluded_blocks>
+                        <meanbee_footer_js_excluded_files translate="label comment">
+                            <label>FooterJS Excluded Files</label>
+                            <frontend_type>textarea</frontend_type>
+                            <comment><![CDATA[Enter script files separated with a comma. All includes for these files will stay untouched and will not be moved to footer.]]></comment>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </meanbee_footer_js_excluded_files>
                     </fields>
                 </js>
             </groups>
