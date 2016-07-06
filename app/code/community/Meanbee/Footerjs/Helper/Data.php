@@ -65,7 +65,9 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
             $success = preg_match_all($pattern, $html, $matches);
             if ($success) {
                 // Strip excluded files
-                $matches[0] = preg_grep($this->getSkippedFilesRegex(), $matches[0], PREG_GREP_INVERT);
+                if ($this->getSkippedFilesRegex() !== false) {
+                    $matches[0] = preg_grep($this->getSkippedFilesRegex(), $matches[0], PREG_GREP_INVERT);
+                }
                 foreach ($matches[0] as $key => $js) {
                     if (strpos($js, self::EXCLUDE_FLAG_PATTERN) !== false) {
                         unset($matches[0][$key]);
@@ -84,9 +86,12 @@ class Meanbee_Footerjs_Helper_Data extends Mage_Core_Helper_Abstract {
     {
         if ($this->skippedFilesRegex === null) {
             $skipConfig = trim(Mage::getStoreConfig(self::XML_CONFIG_FOOTERJS_EXCLUDED_FILES));
-            $skippedFiles = preg_replace('/\s*,\s*/', '|', $skipConfig);
-
-            $this->skippedFilesRegex = sprintf("@src=.*?(%s)@", $skippedFiles);
+            if ($skipConfig !== '') {
+                $skippedFiles = preg_replace('/\s*,\s*/', '|', $skipConfig);
+                $this->skippedFilesRegex = sprintf("@src=.*?(%s)@", $skippedFiles);
+            } else {
+                $this->skippedFilesRegex = false;
+            }
         }
         return $this->skippedFilesRegex;
     }
