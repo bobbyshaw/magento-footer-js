@@ -5,7 +5,7 @@
     "minimum-stability": "stable",
     "authors": [
         {
-            "name": "Tom Robertshaw",
+            "name": "Tom Robertshaw"
         }
     ],
     "require": {
