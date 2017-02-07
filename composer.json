@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "magento-hackathon/magento-composer-installer": "*"
+        "php": ">=5.5"
     },
     "extra": {
         "map": [
