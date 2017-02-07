@@ -1,9 +1,26 @@
 {
+    "name": "mediact/footerjs",
     "description": "Meanbee Footerjs module",
-    "name": "meanbee/footerjs",
+    "type": "magento-module",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Tom Robertshaw",
+        }
+    ],
     "require": {
         "magento-hackathon/magento-composer-installer": "*"
     },
-    "type": "magento-module",
-    "version": "dev-master"
+    "extra": {
+        "map": [
+            [
+                "src/app/code/community/Meanbee/Footerjs",
+                "app/code/community/Meanbee/Footerjs"
+            ],
+            [
+                "src/app/etc/modules/Meanbee_Footerjs.xml",
+                "app/etc/modules/Meanbee_Footerjs.xml"
+            ]
+        ]
+    }
 }
