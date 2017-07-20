@@ -1,9 +1,26 @@
 {
-    "description": "Meanbee Footerjs module",
     "name": "meanbee/footerjs",
-    "require": {
-        "magento-hackathon/magento-composer-installer": "*"
-    },
+    "description": "Meanbee Footerjs module",
     "type": "magento-module",
-    "version": "dev-master"
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Tom Robertshaw"
+        }
+    ],
+    "require": {
+        "php": ">=5.5"
+    },
+    "extra": {
+        "map": [
+            [
+                "src/app/code/community/Meanbee/Footerjs",
+                "app/code/community/Meanbee/Footerjs"
+            ],
+            [
+                "src/app/etc/modules/Meanbee_Footerjs.xml",
+                "app/etc/modules/Meanbee_Footerjs.xml"
+            ]
+        ]
+    }
 }
