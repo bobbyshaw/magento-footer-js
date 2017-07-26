@@ -4,6 +4,11 @@ All notable changes to this extension will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2017-07-26
+### Added
+- Resolved composer support
+- Added to packagist
+
 ## [0.1.1] - 2016-06-06
 ### Changed
 - Fix for excluding specific scripts
